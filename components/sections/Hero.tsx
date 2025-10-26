@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+import Image from 'next/image';
 import { fadeIn, slideUp } from '@/lib/animations';
 
 const roles = ['Full-Stack Developer', 'AI Engineer', 'Software Engineer', 'Problem Solver'];
@@ -49,8 +50,15 @@ export default function Hero() {
             >
               <div className="absolute inset-0 rounded-full opacity-50 blur-xl bg-gradient-primary animate-glow" />
               <div className="relative p-1 w-full h-full rounded-full bg-gradient-primary">
-                <div className="flex justify-center items-center w-full h-full text-4xl font-bold rounded-full bg-background sm:text-5xl md:text-6xl text-gradient">
-                  HO
+                <div className="relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-blue-400 to-purple-600">
+                  <Image
+                    src="/images/avatar.jpg"
+                    alt="Hari Om - Full-Stack Developer & AI Engineer"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px"
+                  />
                 </div>
               </div>
             </motion.div>
