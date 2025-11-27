@@ -52,7 +52,7 @@ export default function Hero() {
               <div className="relative p-1 w-full h-full rounded-full bg-gradient-primary">
                 <div className="relative w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-blue-400 to-purple-600">
                   <Image
-                    src="/images/avatar.jpg"
+                    src="/images/profile.jpg"
                     alt="Hari Om - Full-Stack Developer & AI Engineer"
                     fill
                     className="object-cover"
