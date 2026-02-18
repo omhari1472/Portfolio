@@ -1,5 +1,6 @@
 'use client';
 
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { slideUp, staggerContainer } from '@/lib/animations';
 import { motion } from 'framer-motion';
 import { Briefcase, Calendar, MapPin } from 'lucide-react';
@@ -64,8 +65,20 @@ export default function Experience() {
     <section id="experience" className="relative py-20 md:py-32 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent-pink/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+
+      {/* Aurora blobs — animated */}
+      <motion.div
+        className="absolute top-1/4 right-0 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(255,0,110,0.1) 0%, transparent 70%)', filter: 'blur(60px)' }}
+        animate={{ x: [0, -20, 10, 0], scale: [1, 1.1, 0.9, 1] }}
+        transition={{ duration: 13, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 left-0 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(139,92,246,0.1) 0%, transparent 70%)', filter: 'blur(60px)' }}
+        animate={{ x: [0, 20, -10, 0], scale: [1, 0.9, 1.1, 1] }}
+        transition={{ duration: 16, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut', delay: 5 }}
+      />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -79,12 +92,19 @@ export default function Experience() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-4">
             Work <span className="text-gradient">Experience</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <motion.div
+            className="mx-auto mt-3 h-px w-20 bg-gradient-primary"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
             Building impactful products across UK startups and AI-powered platforms
           </p>
         </motion.div>
 
-        {/* Experience Timeline */}
+        {/* Experience Cards */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -96,59 +116,81 @@ export default function Experience() {
             <motion.div
               key={exp.id}
               variants={slideUp}
-              className="glass p-8 rounded-2xl hover:bg-white/10 transition-all duration-300"
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
             >
-              {/* Header with Gradient Bar */}
-              <div className={`h-1 w-20 bg-gradient-to-r ${exp.gradient} rounded-full mb-6`} />
+              <SpotlightCard className="glass-elite p-8 rounded-2xl group" spotlightColor="rgba(139,92,246,0.1)">
+                {/* Animated gradient bar */}
+                <motion.div
+                  className={`h-1 bg-gradient-to-r ${exp.gradient} rounded-full mb-6`}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: 80 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1], delay: 0.1 }}
+                />
 
-              {/* Company & Role */}
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                <div>
-                  <h3 className="text-2xl font-bold mb-2">{exp.role}</h3>
-                  <div className="flex items-center gap-2 text-primary mb-2">
-                    <Briefcase className="w-5 h-5" />
-                    <span className="font-semibold">{exp.company}</span>
+                {/* Company & Role */}
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">{exp.role}</h3>
+                    <div className="flex items-center gap-2 text-primary mb-2">
+                      <Briefcase className="w-5 h-5" />
+                      <span className="font-semibold">{exp.company}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <MapPin className="w-4 h-4" />
+                      <span>{exp.location}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1.5 text-muted-foreground">
-                    <MapPin className="w-4 h-4" />
-                    <span>{exp.location}</span>
+                  <div className="mt-4 md:mt-0 flex flex-col items-start md:items-end gap-2">
+                    <div className="flex items-center gap-2 text-accent-cyan bg-accent-cyan/10 px-3 py-1.5 rounded-full border border-accent-cyan/20">
+                      <Calendar className="w-4 h-4" />
+                      <span className="font-medium text-sm">{exp.period}</span>
+                    </div>
+                    <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-semibold rounded-full">
+                      {exp.type}
+                    </span>
                   </div>
                 </div>
-                <div className="mt-4 md:mt-0 flex flex-col items-start md:items-end gap-2">
-                  <div className="flex items-center gap-2 text-accent-cyan">
-                    <Calendar className="w-5 h-5" />
-                    <span className="font-medium">{exp.period}</span>
-                  </div>
-                  <span className="px-3 py-1 bg-primary/20 text-primary text-sm font-semibold rounded-full">
-                    {exp.type}
-                  </span>
-                </div>
-              </div>
 
-              {/* Tech Tags */}
-              <div className="mt-5 flex flex-wrap gap-2">
-                {exp.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2.5 py-1 bg-white/5 border border-white/10 text-xs font-mono text-accent-cyan rounded-md"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Achievements */}
-              <div className="mt-6">
-                <h4 className="text-lg font-semibold mb-4">Key Achievements:</h4>
-                <ul className="space-y-3">
-                  {exp.achievements.map((achievement) => (
-                    <li key={achievement.substring(0, 30)} className="flex gap-3 text-muted-foreground">
-                      <span className="text-primary mt-1">▹</span>
-                      <span>{achievement}</span>
-                    </li>
+                {/* Tech Tags */}
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {exp.tags.map((tag) => (
+                    <motion.span
+                      key={tag}
+                      whileHover={{ scale: 1.05, y: -1 }}
+                      className="px-2.5 py-1 bg-primary/10 border border-primary/20 text-xs font-mono text-accent-cyan rounded-md transition-colors hover:bg-primary/20 cursor-default"
+                    >
+                      {tag}
+                    </motion.span>
                   ))}
-                </ul>
-              </div>
+                </div>
+
+                {/* Achievements — staggered slide-in */}
+                <div className="mt-6">
+                  <h4 className="text-lg font-semibold mb-4">Key Achievements:</h4>
+                  <motion.ul
+                    className="space-y-3"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+                  >
+                    {exp.achievements.map((achievement) => (
+                      <motion.li
+                        key={achievement.substring(0, 30)}
+                        variants={{
+                          hidden: { opacity: 0, x: -20 },
+                          visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                        }}
+                        className="flex gap-3 text-muted-foreground"
+                      >
+                        <span className="text-primary mt-1 flex-shrink-0">▹</span>
+                        <span className="leading-relaxed">{achievement}</span>
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                </div>
+              </SpotlightCard>
             </motion.div>
           ))}
         </motion.div>

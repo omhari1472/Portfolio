@@ -1,5 +1,7 @@
 'use client';
 
+import { Marquee } from '@/components/ui/Marquee';
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { slideUp, staggerContainer } from '@/lib/animations';
 import { motion } from 'framer-motion';
 
@@ -16,6 +18,7 @@ const skillCategories = [
       { name: 'Redux', icon: '🔄' },
     ],
     gradient: 'from-blue-500 to-cyan-500',
+    spotlightColor: 'rgba(59,130,246,0.12)',
   },
   {
     id: 'backend',
@@ -29,6 +32,7 @@ const skillCategories = [
       { name: 'MongoDB', icon: '🍃' },
     ],
     gradient: 'from-green-500 to-teal-500',
+    spotlightColor: 'rgba(20,184,166,0.12)',
   },
   {
     id: 'ai-ml',
@@ -40,6 +44,7 @@ const skillCategories = [
       { name: 'Prompt Engineering', icon: '✍️' },
     ],
     gradient: 'from-purple-500 to-pink-500',
+    spotlightColor: 'rgba(139,92,246,0.14)',
   },
   {
     id: 'tools',
@@ -53,6 +58,7 @@ const skillCategories = [
       { name: 'Azure', icon: '🔵' },
     ],
     gradient: 'from-orange-500 to-red-500',
+    spotlightColor: 'rgba(249,115,22,0.12)',
   },
 ];
 
@@ -61,8 +67,18 @@ export default function Skills() {
     <section id="skills" className="overflow-hidden relative py-20 md:py-32">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background-secondary to-background" />
-      <div className="absolute left-0 top-1/3 w-96 h-96 rounded-full blur-3xl bg-primary/10" />
-      <div className="absolute right-0 bottom-1/3 w-96 h-96 rounded-full blur-3xl bg-accent-cyan/10" />
+      <motion.div
+        className="absolute left-0 top-1/3 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, transparent 70%)', filter: 'blur(60px)' }}
+        animate={{ x: [0, 20, -10, 0], scale: [1, 1.1, 0.9, 1] }}
+        transition={{ duration: 11, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute right-0 bottom-1/3 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.1) 0%, transparent 70%)', filter: 'blur(60px)' }}
+        animate={{ x: [0, -20, 10, 0], scale: [1, 0.9, 1.1, 1] }}
+        transition={{ duration: 14, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut', delay: 4 }}
+      />
 
       <div className="container relative px-4 mx-auto sm:px-6 lg:px-8">
         {/* Header */}
@@ -76,7 +92,14 @@ export default function Skills() {
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl font-heading">
             Skills & <span className="text-gradient">Expertise</span>
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          <motion.div
+            className="mx-auto mt-3 h-px w-20 bg-gradient-primary"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
             Technologies and tools I use to bring ideas to life
           </p>
         </motion.div>
@@ -90,32 +113,51 @@ export default function Skills() {
           className="grid grid-cols-1 gap-8 md:grid-cols-2"
         >
           {skillCategories.map((category) => (
-            <motion.div
-              key={category.id}
-              variants={slideUp}
-              className="p-8 rounded-2xl transition-all duration-300 glass hover:bg-white/10"
-            >
-              {/* Category Header */}
-              <div className="flex gap-3 items-center mb-6">
-                <div className={`h-1 w-12 bg-gradient-to-r ${category.gradient} rounded-full`} />
-                <h3 className="text-2xl font-bold">{category.title}</h3>
-              </div>
-
-              {/* Skills Cards Grid */}
-              <div className="grid grid-cols-2 gap-3">
-                {category.skills.map((skill) => (
+            <motion.div key={category.id} variants={slideUp} whileHover={{ y: -4, transition: { duration: 0.2 } }}>
+              <SpotlightCard
+                className="p-8 rounded-2xl glass-elite h-full"
+                spotlightColor={category.spotlightColor}
+              >
+                {/* Category Header */}
+                <div className="flex gap-3 items-center mb-6">
                   <motion.div
-                    key={skill.name}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    className="p-4 rounded-xl border transition-all duration-300 bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20"
-                  >
-                    <div className="flex flex-col items-center text-center">
-                      <div className="mb-2 text-2xl">{skill.icon}</div>
-                      <span className="text-sm font-medium text-white">{skill.name}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+                    className={`h-1 bg-gradient-to-r ${category.gradient} rounded-full`}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: 48 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+                  />
+                  <h3 className="text-2xl font-bold">{category.title}</h3>
+                </div>
+
+                {/* Marquee skill rows */}
+                <div className="space-y-3">
+                  <Marquee speed="normal" pauseOnHover>
+                    {category.skills.slice(0, Math.ceil(category.skills.length / 2)).map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/25 hover:bg-white/10 transition-all duration-200 cursor-default flex-shrink-0"
+                      >
+                        <span className="text-xl">{skill.icon}</span>
+                        <span className="text-sm font-medium text-white whitespace-nowrap">{skill.name}</span>
+                      </div>
+                    ))}
+                  </Marquee>
+                  {category.skills.length > 3 && (
+                    <Marquee speed="normal" reverse pauseOnHover>
+                      {category.skills.slice(Math.ceil(category.skills.length / 2)).map((skill) => (
+                        <div
+                          key={skill.name}
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/25 hover:bg-white/10 transition-all duration-200 cursor-default flex-shrink-0"
+                        >
+                          <span className="text-xl">{skill.icon}</span>
+                          <span className="text-sm font-medium text-white whitespace-nowrap">{skill.name}</span>
+                        </div>
+                      ))}
+                    </Marquee>
+                  )}
+                </div>
+              </SpotlightCard>
             </motion.div>
           ))}
         </motion.div>

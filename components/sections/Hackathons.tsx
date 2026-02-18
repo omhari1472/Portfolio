@@ -1,5 +1,6 @@
 'use client';
 
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { motion } from 'framer-motion';
 import { Award, Trophy } from 'lucide-react';
 import { slideUp, staggerContainer } from '@/lib/animations';
@@ -65,8 +66,18 @@ export default function Hackathons() {
     <section id="hackathons" className="overflow-hidden relative py-20 md:py-32">
       {/* Background */}
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute left-0 top-1/4 w-96 h-96 rounded-full blur-3xl bg-accent-pink/10" />
-      <div className="absolute right-0 bottom-1/4 w-96 h-96 rounded-full blur-3xl bg-accent-cyan/10" />
+      <motion.div
+        className="absolute left-0 top-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(255,0,110,0.1) 0%, transparent 70%)', filter: 'blur(60px)' }}
+        animate={{ x: [0, 20, -10, 0], scale: [1, 1.1, 0.9, 1] }}
+        transition={{ duration: 13, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute right-0 bottom-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.1) 0%, transparent 70%)', filter: 'blur(60px)' }}
+        animate={{ x: [0, -20, 10, 0], scale: [1, 0.9, 1.1, 1] }}
+        transition={{ duration: 16, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut', delay: 5 }}
+      />
 
       <div className="container relative px-4 mx-auto sm:px-6 lg:px-8">
         {/* Header */}
@@ -80,7 +91,14 @@ export default function Hackathons() {
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl font-heading">
             Hackathons & <span className="text-gradient">Achievements</span>
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          <motion.div
+            className="mx-auto mt-3 h-px w-20 bg-gradient-primary"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
             Competitive coding and problem-solving experiences
           </p>
         </motion.div>
@@ -97,53 +115,80 @@ export default function Hackathons() {
             <motion.div
               key={hackathon.id}
               variants={slideUp}
-              className="p-8 rounded-2xl transition-all duration-300 glass hover:bg-white/10"
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
             >
-              {/* Gradient Bar */}
-              <div className={`h-1 w-20 bg-gradient-to-r ${hackathon.gradient} rounded-full mb-6`} />
+              <SpotlightCard className="p-8 rounded-2xl glass-elite" spotlightColor="rgba(139,92,246,0.1)">
+                {/* Animated Gradient Bar */}
+                <motion.div
+                  className={`h-1 bg-gradient-to-r ${hackathon.gradient} rounded-full mb-6`}
+                  initial={{ width: 0 }}
+                  whileInView={{ width: 80 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+                />
 
-              {/* Header */}
-              <div className="flex flex-col mb-6 md:flex-row md:items-start md:justify-between">
-                <div className="flex flex-1 gap-4 items-start">
-                  <div className={`p-3 glass rounded-xl bg-gradient-to-r ${hackathon.gradient}`}>
-                    <hackathon.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="mb-2 text-2xl font-bold">{hackathon.name}</h3>
-                    <div className="flex flex-wrap gap-4 items-center mb-2">
-                      <span className="font-semibold text-primary">{hackathon.project}</span>
-                      <span className="px-3 py-1 text-sm font-semibold rounded-full bg-accent-cyan/20 text-accent-cyan">
-                        {hackathon.position}
-                      </span>
+                {/* Header */}
+                <div className="flex flex-col mb-6 md:flex-row md:items-start md:justify-between">
+                  <div className="flex flex-1 gap-4 items-start">
+                    <div className={`p-3 rounded-xl bg-gradient-to-r ${hackathon.gradient} flex-shrink-0`}>
+                      <hackathon.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-2xl font-bold">{hackathon.name}</h3>
+                      <div className="flex flex-wrap gap-3 items-center">
+                        <span className="font-semibold text-primary">{hackathon.project}</span>
+                        <motion.span
+                          whileHover={{ scale: 1.05 }}
+                          className="px-3 py-1.5 text-sm font-bold rounded-full bg-gradient-to-r from-accent-cyan/20 to-primary/20 border border-accent-cyan/30 text-accent-cyan"
+                        >
+                          {hackathon.position}
+                        </motion.span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Description */}
-              <p className="mb-6 text-muted-foreground">{hackathon.description}</p>
+                {/* Description */}
+                <p className="mb-6 text-muted-foreground">{hackathon.description}</p>
 
-              {/* Achievements */}
-              <div className="mb-6">
-                <h4 className="mb-3 text-lg font-semibold">Key Contributions:</h4>
-                <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                  {hackathon.achievements.map((achievement) => (
-                    <li key={achievement.substring(0, 30)} className="flex gap-2 text-sm text-muted-foreground">
-                      <span className="mt-1 text-primary">▹</span>
-                      <span>{achievement}</span>
-                    </li>
+                {/* Achievements — staggered */}
+                <div className="mb-6">
+                  <h4 className="mb-3 text-lg font-semibold">Key Contributions:</h4>
+                  <motion.ul
+                    className="grid grid-cols-1 gap-3 md:grid-cols-2"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={{ visible: { transition: { staggerChildren: 0.07 } } }}
+                  >
+                    {hackathon.achievements.map((achievement) => (
+                      <motion.li
+                        key={achievement.substring(0, 30)}
+                        variants={{
+                          hidden: { opacity: 0, x: -15 },
+                          visible: { opacity: 1, x: 0, transition: { duration: 0.35 } },
+                        }}
+                        className="flex gap-2 text-sm text-muted-foreground"
+                      >
+                        <span className="mt-1 text-primary flex-shrink-0">▹</span>
+                        <span>{achievement}</span>
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                </div>
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2">
+                  {hackathon.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs rounded-full bg-primary/10 border border-primary/20 text-primary/80 font-mono"
+                    >
+                      {tech}
+                    </span>
                   ))}
-                </ul>
-              </div>
-
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2">
-                {hackathon.tech.map((tech) => (
-                  <span key={tech} className="px-3 py-1 text-xs rounded-full bg-white/5 text-muted-foreground">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+                </div>
+              </SpotlightCard>
             </motion.div>
           ))}
         </motion.div>
@@ -164,14 +209,16 @@ export default function Hackathons() {
               <motion.div
                 key={achievement.id}
                 variants={slideUp}
-                className="p-6 rounded-2xl transition-all duration-300 glass hover:bg-white/10"
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
               >
-                <div className={`inline-block p-3 glass rounded-xl bg-gradient-to-r ${achievement.gradient} mb-4`}>
-                  <achievement.icon className="w-6 h-6 text-white" />
-                </div>
-                <h4 className="mb-2 text-xl font-bold">{achievement.title}</h4>
-                <p className="mb-2 text-muted-foreground">{achievement.description}</p>
-                <span className="font-semibold text-accent-cyan">{achievement.year}</span>
+                <SpotlightCard className="p-6 rounded-2xl glass-elite h-full" spotlightColor="rgba(139,92,246,0.1)">
+                  <div className={`inline-block p-3 rounded-xl bg-gradient-to-r ${achievement.gradient} mb-4`}>
+                    <achievement.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="mb-2 text-xl font-bold">{achievement.title}</h4>
+                  <p className="mb-2 text-muted-foreground">{achievement.description}</p>
+                  <span className="font-semibold text-accent-cyan">{achievement.year}</span>
+                </SpotlightCard>
               </motion.div>
             ))}
           </div>

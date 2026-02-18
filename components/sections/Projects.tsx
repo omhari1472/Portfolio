@@ -1,9 +1,11 @@
 'use client';
 
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
+import { slideUp, staggerContainer } from '@/lib/animations';
+import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ExternalLink, Github, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
-import { slideUp, staggerContainer } from '@/lib/animations';
 
 const projects = [
   {
@@ -17,12 +19,13 @@ const projects = [
     featured: true,
     type: 'personal',
     hasDemo: true,
+    size: 'large',
   },
   {
     id: 'google-calendar-npm',
     title: 'Google Calendar Client (NPM)',
     description:
-      'Personal NPM package for seamless Google Calendar integration with auto-refresh token management. Zero external dependencies, built for production use. Published 4 days ago with 150+ downloads.',
+      'Personal NPM package for seamless Google Calendar integration with auto-refresh token management. Zero external dependencies, built for production use. Published with 150+ downloads.',
     impact: '150+ downloads in 4 days',
     tags: ['NPM', 'Google Calendar API', 'Node.js', 'TypeScript'],
     gradient: 'from-green-500 to-teal-500',
@@ -30,6 +33,7 @@ const projects = [
     type: 'personal',
     hasDemo: true,
     demoUrl: 'https://www.npmjs.com/package/google-calendar-client',
+    size: 'normal',
   },
   {
     id: 'linkedin-extension',
@@ -43,12 +47,13 @@ const projects = [
     type: 'company',
     hasDemo: true,
     demoUrl: 'https://chromewebstore.google.com/detail/oedechpcnjolalnpghbibmadgfjgaopm',
+    size: 'large',
   },
   {
     id: 'whatsapp-extension',
     title: 'WAsurge - WhatsApp CRM Extension',
     description:
-      'Chrome extension that transforms WhatsApp Web into a powerful CRM. Features bulk messaging, contact management, CSV uploads, and progress tracking. Built with Plasmo and Shadow DOM. Perfect 5.0★ rating with 282+ users.',
+      'Chrome extension that transforms WhatsApp Web into a powerful CRM. Features bulk messaging, contact management, CSV uploads, and progress tracking. Perfect 5.0★ rating with 282+ users.',
     impact: '5.0★ rating, 282+ users',
     tags: ['Chrome Extension', 'Plasmo', 'CRM', 'Shadow DOM'],
     gradient: 'from-green-600 to-emerald-500',
@@ -56,18 +61,20 @@ const projects = [
     type: 'company',
     hasDemo: true,
     demoUrl: 'https://chromewebstore.google.com/detail/bdnjmmbbchjkbnmbphchknkalfakofnj',
+    size: 'normal',
   },
   {
     id: 'payment-gateway',
     title: 'NxtJob Payment Platform',
     description:
-      'Production payment platform supporting multiple Indian gateways (PhonePe, Paytm, Razorpay, Cashfree, Stripe). Features automated invoicing, subscription management, and access control for job platform services.',
+      'Production payment platform supporting multiple Indian gateways (PhonePe, Paytm, Razorpay, Cashfree, Stripe). Features automated invoicing, subscription management, and access control.',
     impact: '25% efficiency boost',
     tags: ['Node.js', 'Payment APIs', 'Automation'],
     gradient: 'from-indigo-500 to-purple-500',
     type: 'company',
     hasDemo: true,
     demoUrl: 'https://pay.nxtjob.ai/ignite',
+    size: 'normal',
   },
   {
     id: 'omega',
@@ -79,6 +86,7 @@ const projects = [
     gradient: 'from-purple-500 to-pink-500',
     type: 'company-private',
     hasDemo: false,
+    size: 'normal',
   },
   {
     id: 'erp-crm',
@@ -90,6 +98,7 @@ const projects = [
     gradient: 'from-emerald-500 to-teal-500',
     type: 'company-private',
     hasDemo: false,
+    size: 'normal',
   },
 ];
 
@@ -102,20 +111,29 @@ export default function Projects() {
     selectedCategory === 'All'
       ? projects
       : selectedCategory === 'Personal'
-        ? projects.filter((project) => project.type === 'personal')
+        ? projects.filter((p) => p.type === 'personal')
         : selectedCategory === 'Company Public'
-          ? projects.filter((project) => project.type === 'company')
+          ? projects.filter((p) => p.type === 'company')
           : selectedCategory === 'Company Private'
-            ? projects.filter((project) => project.type === 'company-private')
-            : projects.filter((project) => project.tags.includes(selectedCategory));
-
+            ? projects.filter((p) => p.type === 'company-private')
+            : projects.filter((p) => p.tags.includes(selectedCategory));
 
   return (
     <section id="projects" className="overflow-hidden relative py-20 md:py-32">
       {/* Background */}
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl bg-accent-cyan/10" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl bg-accent-pink/10" />
+      <motion.div
+        className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.3) 0%, transparent 70%)', filter: 'blur(60px)' }}
+        animate={{ x: [0, 30, -20, 0], y: [0, -20, 30, 0] }}
+        transition={{ duration: 14, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(255,0,110,0.25) 0%, transparent 70%)', filter: 'blur(60px)' }}
+        animate={{ x: [0, -25, 15, 0], y: [0, 25, -15, 0] }}
+        transition={{ duration: 18, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut', delay: 5 }}
+      />
 
       <div className="container relative px-4 mx-auto sm:px-6 lg:px-8">
         {/* Header */}
@@ -129,12 +147,19 @@ export default function Projects() {
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl font-heading">
             Featured <span className="text-gradient">Projects</span>
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          <motion.div
+            className="mx-auto mt-3 h-px w-20 bg-gradient-primary"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
             Building innovative solutions that drive real business impact
           </p>
         </motion.div>
 
-        {/* Category Filter */}
+        {/* Category Filter — animated pill */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -143,22 +168,30 @@ export default function Projects() {
           className="flex flex-wrap gap-3 justify-center mb-12"
         >
           {categories.map((category) => (
-            <button
+            <motion.button
               key={category}
               type="button"
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                selectedCategory === category
-                  ? 'bg-gradient-primary text-white shadow-lg shadow-primary/50'
-                  : 'glass text-muted-foreground hover:text-white hover:bg-white/10'
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors duration-300 ${
+                selectedCategory === category ? 'text-white' : 'text-muted-foreground hover:text-white'
               }`}
             >
+              {selectedCategory === category && (
+                <motion.div
+                  layoutId="filter-pill"
+                  className="absolute inset-0 rounded-full bg-gradient-primary"
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
+                  style={{ zIndex: -1 }}
+                />
+              )}
               {category}
-            </button>
+            </motion.button>
           ))}
         </motion.div>
 
-        {/* Projects Grid */}
+        {/* Bento Projects Grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedCategory}
@@ -173,88 +206,89 @@ export default function Projects() {
                 key={project.id}
                 variants={slideUp}
                 layout
-                className={`glass rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300 group ${
-                  project.featured ? 'md:col-span-2 lg:col-span-1' : ''
-                }`}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className={cn('rounded-2xl overflow-hidden group h-full', project.size === 'large' ? 'lg:col-span-2' : 'col-span-1')}
               >
-                {/* Project Header with Gradient */}
-                <div className={`h-2 bg-gradient-to-r ${project.gradient}`} />
+                <SpotlightCard className="glass rounded-2xl overflow-hidden h-full flex flex-col">
+                  {/* Animated gradient top bar */}
+                  <motion.div
+                    className={`h-1.5 bg-gradient-to-r ${project.gradient}`}
+                    initial={{ scaleX: 0, originX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1], delay: 0.2 }}
+                  />
 
-                <div className="p-6">
-                  {/* Title & Badges */}
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold transition-all group-hover:text-gradient">{project.title}</h3>
-                    <div className="flex gap-2 flex-col items-end">
-                      {project.featured && (
-                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/20 text-primary">
-                          Featured
+                  <div className="p-6 flex flex-col flex-1">
+                    {/* Title & Badges */}
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="text-xl font-bold transition-all group-hover:text-gradient">{project.title}</h3>
+                      <div className="flex gap-2 flex-col items-end ml-2 flex-shrink-0">
+                        {project.featured && (
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/20 text-primary">
+                            Featured
+                          </span>
+                        )}
+                        <span
+                          className={cn(
+                            'px-2 py-1 text-xs font-medium rounded-full',
+                            project.type === 'personal' && 'bg-blue-500/20 text-blue-400',
+                            project.type === 'company' && 'bg-purple-500/20 text-purple-400',
+                            project.type === 'company-private' && 'bg-orange-500/20 text-orange-400'
+                          )}
+                        >
+                          {project.type === 'personal' ? 'Personal' : project.type === 'company' ? 'Public' : 'Private'}
                         </span>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <p className="mb-4 text-sm text-muted-foreground line-clamp-3">{project.description}</p>
+
+                    {/* Impact Badge */}
+                    <div className="flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 w-fit">
+                      <TrendingUp className="w-3.5 h-3.5 text-accent-cyan" />
+                      <span className="text-xs font-bold text-accent-cyan tracking-wide">{project.impact}</span>
+                    </div>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-1 text-xs rounded-full bg-primary/10 border border-primary/20 text-primary/80 font-mono"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex gap-3 mt-auto">
+                      {project.hasDemo ? (
+                        <a
+                          href={(project as { demoUrl?: string }).demoUrl || '#'}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-white rounded-lg transition-all duration-300 bg-gradient-primary hover:shadow-lg hover:shadow-primary/50"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          {project.tags.includes('NPM')
+                            ? 'View on NPM'
+                            : project.tags.includes('Chrome Extension')
+                              ? 'View Extension'
+                              : project.tags.includes('Payment APIs')
+                                ? 'View Platform'
+                                : 'View Demo'}
+                        </a>
+                      ) : (
+                        <div className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-muted-foreground rounded-lg bg-white/5">
+                          <span className="text-sm">Proprietary Project</span>
+                        </div>
                       )}
-                      <span
-                        className={`px-2 py-1 text-xs font-medium rounded-full ${
-                          project.type === 'personal'
-                            ? 'bg-blue-500/20 text-blue-400'
-                            : project.type === 'open-source'
-                              ? 'bg-green-500/20 text-green-400'
-                              : project.type === 'company'
-                                ? 'bg-purple-500/20 text-purple-400'
-                                : 'bg-orange-500/20 text-orange-400'
-                        }`}
-                      >
-                        {project.type === 'personal'
-                          ? 'Personal'
-                          : project.type === 'open-source'
-                            ? 'Open Source'
-                            : project.type === 'company'
-                              ? 'Public'
-                              : 'Private'}
-                      </span>
                     </div>
                   </div>
-
-                  {/* Description */}
-                  <p className="mb-4 text-sm text-muted-foreground line-clamp-3">{project.description}</p>
-
-                  {/* Impact Badge */}
-                  <div className="flex gap-2 items-center mb-4">
-                    <TrendingUp className="w-4 h-4 text-accent-cyan" />
-                    <span className="text-sm font-semibold text-accent-cyan">{project.impact}</span>
-                  </div>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 text-xs rounded-full bg-white/5 text-muted-foreground">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex gap-3">
-                    {project.hasDemo ? (
-                      <a
-                        href={project.demoUrl || '#'}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-white rounded-lg transition-all duration-300 bg-gradient-primary hover:shadow-lg hover:shadow-primary/50"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        {project.tags.includes('NPM')
-                          ? 'View on NPM'
-                          : project.tags.includes('Chrome Extension')
-                            ? 'View Extension'
-                            : project.tags.includes('Payment APIs')
-                              ? 'View Platform'
-                              : 'View Demo'}
-                      </a>
-                    ) : (
-                      <div className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-muted-foreground rounded-lg bg-white/5">
-                        <span className="text-sm">Proprietary Project</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                </SpotlightCard>
               </motion.div>
             ))}
           </motion.div>

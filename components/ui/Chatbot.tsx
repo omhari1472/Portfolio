@@ -307,7 +307,8 @@ export default function Chatbot() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKey}
                 placeholder="Ask about Hari…"
-                className="flex-1 bg-white/6 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-purple-500/60 transition-colors"
+                className="flex-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-purple-500/60 transition-colors"
+                style={{ background: 'rgba(255,255,255,0.06)', colorScheme: 'dark' }}
               />
               <motion.button
                 onClick={() => send(input)}
