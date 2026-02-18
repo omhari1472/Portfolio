@@ -2,16 +2,33 @@
 
 import { slideUp, staggerContainer } from '@/lib/animations';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar } from 'lucide-react';
+import { Briefcase, Calendar, MapPin } from 'lucide-react';
 
 const experiences = [
+  {
+    id: 'watevs-sde',
+    company: 'Watevs',
+    location: 'London, United Kingdom',
+    role: 'Software Engineer',
+    period: 'February 2026 - Present',
+    type: 'Full-time',
+    tags: ['Go', 'Svelte', 'ElysiaJS', 'Bun', 'TypeScript'],
+    achievements: [
+      'Architected and built the Sequencer — a campaign planning engine that lets teams design multi-step cold email sequences with configurable delays, branching conditions, and audience targeting',
+      'Engineered high-throughput email dispatch services in Go, enabling reliable bulk delivery with per-recipient personalisation at scale',
+      'Developed a reply-tracking pipeline that captures inbound responses, threads them to the originating campaign, and surfaces engagement analytics in real time',
+      'Built the campaign management dashboard in Svelte, providing a fast, reactive UI for monitoring sequence progress, open/reply rates, and prospect status',
+    ],
+    gradient: 'from-orange-500 to-amber-400',
+  },
   {
     id: 'nxtjob-sde',
     company: 'NxtJob.ai',
     location: 'Bengaluru, Karnataka',
     role: 'Software Development Engineer',
-    period: 'June 2025 - Present',
+    period: 'June 2025 - January 2026',
     type: 'Full-time',
+    tags: ['React', 'Next.js', 'Node.js', 'TypeScript', 'LLMs', 'RAG'],
     achievements: [
       'Revamped LinkedIn & WhatsApp Chrome extensions, implementing advanced chat categorization and scheduling, increasing user engagement by 30% among 2K users',
       'Developed an AI Chat Reply system leveraging LLMs + RAG to generate context-aware replies, improving reliability by 40% across 500+ daily active users',
@@ -27,6 +44,7 @@ const experiences = [
     role: 'Software Development Intern',
     period: 'September 2024 - May 2025',
     type: 'Internship',
+    tags: ['React', 'MySQL', 'Drizzle ORM', 'AWS SES', 'AI/ML'],
     achievements: [
       'Developed a role-based ERP/CRM backend to manage client data and sales pipelines, improving team efficiency by 30% across about 10K monthly records',
       'Built a multi-calendar module with team views and real-time Google Calendar sync, reducing event update times to 200 ms and supporting 100+ concurrent users',
@@ -61,7 +79,9 @@ export default function Experience() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-4">
             Work <span className="text-gradient">Experience</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Building impactful solutions at NxtJob.ai</p>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Building impactful products across UK startups and AI-powered platforms
+          </p>
         </motion.div>
 
         {/* Experience Timeline */}
@@ -89,7 +109,10 @@ export default function Experience() {
                     <Briefcase className="w-5 h-5" />
                     <span className="font-semibold">{exp.company}</span>
                   </div>
-                  <p className="text-muted-foreground">{exp.location}</p>
+                  <div className="flex items-center gap-1.5 text-muted-foreground">
+                    <MapPin className="w-4 h-4" />
+                    <span>{exp.location}</span>
+                  </div>
                 </div>
                 <div className="mt-4 md:mt-0 flex flex-col items-start md:items-end gap-2">
                   <div className="flex items-center gap-2 text-accent-cyan">
@@ -100,6 +123,18 @@ export default function Experience() {
                     {exp.type}
                   </span>
                 </div>
+              </div>
+
+              {/* Tech Tags */}
+              <div className="mt-5 flex flex-wrap gap-2">
+                {exp.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2.5 py-1 bg-white/5 border border-white/10 text-xs font-mono text-accent-cyan rounded-md"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
 
               {/* Achievements */}
