@@ -54,9 +54,13 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
         className={cn(
           'rounded-full transition-all duration-500 px-4 py-2',
-          'border border-white/10 backdrop-blur-xl',
-          isScrolled ? 'bg-white/8 shadow-xl shadow-black/20 border-white/15' : 'bg-white/5'
+          'border backdrop-blur-xl',
         )}
+        style={{
+          borderColor: isScrolled ? 'rgba(249,115,22,0.15)' : 'rgba(255,255,255,0.06)',
+          background: isScrolled ? 'rgba(10,10,10,0.85)' : 'rgba(10,10,10,0.5)',
+          boxShadow: isScrolled ? '0 8px 32px rgba(0,0,0,0.4)' : 'none',
+        }}
       >
         <div className="flex items-center gap-1">
           {/* Logo */}
@@ -65,7 +69,8 @@ export default function Navbar() {
             onClick={() => handleNavClick('#home')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-xl font-bold font-heading bg-gradient-to-r from-primary to-accent-cyan bg-clip-text text-transparent px-3 py-1.5 mr-1"
+            className="px-3 py-1.5 mr-1 text-gradient"
+            style={{ fontFamily: 'var(--font-display), Bebas Neue, sans-serif', fontSize: '22px', letterSpacing: '0.1em' }}
           >
             HO
           </motion.button>
@@ -85,17 +90,22 @@ export default function Navbar() {
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={cn(
-                  'relative px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-300',
-                  activeSection === item.href.substring(1) ? 'text-white' : 'text-muted-foreground hover:text-white'
-                )}
+                className="relative px-3 py-1.5 text-sm font-medium transition-colors duration-200"
+                style={{
+                  color: activeSection === item.href.substring(1) ? '#F97316' : '#555555',
+                  fontFamily: 'var(--font-mono), JetBrains Mono, monospace',
+                  fontSize: '11px',
+                  letterSpacing: '0.05em',
+                }}
+                onMouseEnter={e => { if (activeSection !== item.href.substring(1)) (e.currentTarget as HTMLElement).style.color = '#AAAAAA'; }}
+                onMouseLeave={e => { if (activeSection !== item.href.substring(1)) (e.currentTarget as HTMLElement).style.color = '#555555'; }}
               >
                 {activeSection === item.href.substring(1) && (
                   <motion.div
-                    layoutId="active-pill"
-                    className="absolute inset-0 rounded-full bg-gradient-primary"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
-                    style={{ zIndex: -1 }}
+                    layoutId="active-underline"
+                    className="absolute bottom-0 left-3 right-3 h-px"
+                    style={{ background: '#F97316' }}
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                   />
                 )}
                 {item.name}

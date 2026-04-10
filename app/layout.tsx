@@ -1,35 +1,43 @@
 import ClientProviders from '@/components/ui/ClientProviders';
 import type { Metadata } from 'next';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Bebas_Neue, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
+const bebasNeue = Bebas_Neue({
+  weight: '400',
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-display',
   display: 'swap',
   preload: true,
 });
 
-const spaceGrotesk = Space_Grotesk({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-sans',
   display: 'swap',
   preload: true,
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  preload: false,
 });
 
 export const metadata: Metadata = {
-  title: 'Hari Om - Full-Stack Developer & AI Engineer',
+  title: 'Hari Om — AI Systems Engineer · Distributed Infrastructure',
   description:
-    'Portfolio of Hari Om, a Full-Stack Developer and AI Engineer specializing in React, Next.js, Node.js, and AI/ML technologies. Currently working at NxtJob.ai in Bengaluru.',
-  keywords: ['Hari Om', 'Full-Stack Developer', 'AI Engineer', 'React', 'Next.js', 'Node.js', 'NxtJob.ai', 'Portfolio'],
+    'Portfolio of Hari Om. Building a 100k+/day email dispatch engine and AI orchestration agent for a London startup. Open to senior backend and AI engineering roles at US/UK startups.',
+  keywords: ['Hari Om', 'AI Systems Engineer', 'Distributed Infrastructure', 'NestJS', 'Redis', 'BullMQ', 'IMAP', 'LLM', 'Agent Orchestration'],
   authors: [{ name: 'Hari Om' }],
   icons: {
     icon: '/images/avatar-circular.png',
     apple: '/images/avatar-circular.png',
   },
   openGraph: {
-    title: 'Hari Om - Full-Stack Developer & AI Engineer',
-    description: 'Portfolio showcasing projects in web development, AI/ML, and software engineering',
+    title: 'Hari Om — AI Systems Engineer',
+    description: 'Building distributed infrastructure and AI agents at production scale.',
     type: 'website',
     locale: 'en_US',
     images: ['/images/avatar-circular.png'],
@@ -43,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased bg-background text-foreground`}>
+      <body className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}>
         <ClientProviders>
           {children}
         </ClientProviders>

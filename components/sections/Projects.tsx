@@ -9,100 +9,114 @@ import { useState } from 'react';
 
 const projects = [
   {
-    id: 'research-sync',
-    title: 'Research Sync',
+    id: 'ai-orchestration-agent',
+    title: 'AI Outbound Orchestration Agent',
     description:
-      'Personal project: Collaborative research platform with real-time multi-user editing, custom version control, and Google Scholar integration. Features auto-save and document segmentation.',
-    impact: '20% productivity increase',
-    tags: ['React', 'Node.js', 'Socket.IO', 'MongoDB', 'Quill.js'],
-    gradient: 'from-blue-500 to-cyan-500',
+      'An AI agent that collapses a 4-service outbound sales pipeline into a single natural language prompt. Routes autonomously across data sourcing, contact enrichment, inbox warmup, and sequence execution — replacing ~2 hours of manual campaign setup.',
+    impact: 'One prompt → full campaign live · 4 services orchestrated end-to-end',
+    tags: ['AI Agent', 'LLM', 'Tool Routing', 'NestJS', 'TypeScript'],
+    gradient: 'from-violet-500 to-fuchsia-500',
     featured: true,
-    type: 'personal',
-    hasDemo: true,
+    type: 'company-private',
+    hasDemo: false,
     size: 'large',
+  },
+  {
+    id: 'surtur-engine',
+    title: 'Surtur — Email Dispatch & Warmup Engine',
+    description:
+      'Distributed email infrastructure processing 100,000+ emails/day across rotating mailboxes. 5-queue Redis/BullMQ event system with IMAP connection pooling, mutex-guarded OAuth2 token refresh, DSN bounce detection (RFC 3464), and real-time deliverability scoring.',
+    impact: '100,000+ emails/day · 5-queue pipeline · hundreds of mailboxes in production',
+    tags: ['NestJS', 'Redis', 'BullMQ', 'IMAP', 'OAuth2', 'TypeScript'],
+    gradient: 'from-orange-500 to-amber-400',
+    featured: true,
+    type: 'company-private',
+    hasDemo: false,
+    size: 'large',
+  },
+  {
+    id: 'nxtjob-chrome-suite',
+    title: 'NxtJob AI Chrome Extension Suite',
+    description:
+      'AI-powered LinkedIn productivity extension — LLM-generated profile copy, RAG-based chat replies, and job tracking board. Built with Plasmo and Shadow DOM injection for reliable operation inside LinkedIn\'s dynamic React UI.',
+    impact: '3,000+ installs · 4.6★ Chrome Web Store · 500+ daily active users',
+    tags: ['Plasmo', 'TypeScript', 'LLM', 'RAG', 'Shadow DOM'],
+    gradient: 'from-blue-500 to-indigo-500',
+    featured: true,
+    type: 'company',
+    hasDemo: true,
+    demoUrl: 'https://chromewebstore.google.com/detail/oedechpcnjolalnpghbibmadgfjgaopm',
+    size: 'normal',
+  },
+  {
+    id: 'narad-ext',
+    title: 'Narad — WhatsApp Bulk Sender & CRM',
+    description:
+      'My own WhatsApp outreach extension with anti-ban safe mode, bulk messaging, contact management, CSV import, and campaign tracking. Built with Plasmo, Redux Persist, and Zod — designed for reliability at scale.',
+    impact: 'Personal product · launching on Chrome Web Store',
+    tags: ['Plasmo', 'TypeScript', 'Redux', 'Zod', 'Chrome Extension'],
+    gradient: 'from-green-500 to-emerald-500',
+    featured: false,
+    type: 'personal',
+    hasDemo: false,
+    size: 'normal',
+  },
+  {
+    id: 'postly-ext',
+    title: 'Postly — LinkedIn AI Post Writer',
+    description:
+      'My own LinkedIn AI writing assistant with content calendar and engagement tracking. AI-generated post drafts, scheduling, and performance analytics — built entirely independently.',
+    impact: 'Personal product · launching on Chrome Web Store',
+    tags: ['Plasmo', 'TypeScript', 'AI/ML', 'Chrome Extension'],
+    gradient: 'from-blue-400 to-indigo-400',
+    featured: false,
+    type: 'personal',
+    hasDemo: false,
+    size: 'normal',
   },
   {
     id: 'google-calendar-npm',
     title: 'Google Calendar Client (NPM)',
     description:
-      'Personal NPM package for seamless Google Calendar integration with auto-refresh token management. Zero external dependencies, built for production use. Published with 150+ downloads.',
-    impact: '150+ downloads in 4 days',
-    tags: ['NPM', 'Google Calendar API', 'Node.js', 'TypeScript'],
-    gradient: 'from-green-500 to-teal-500',
-    featured: true,
+      'Zero-dependency TypeScript NPM package for Google Calendar API with OAuth2 auto-refresh token management and full event CRUD. Published and maintained independently.',
+    impact: '150+ downloads in first 4 days after publish',
+    tags: ['TypeScript', 'OAuth2', 'NPM', 'Google Calendar API'],
+    gradient: 'from-teal-500 to-cyan-500',
+    featured: false,
     type: 'personal',
     hasDemo: true,
     demoUrl: 'https://www.npmjs.com/package/google-calendar-client',
     size: 'normal',
   },
   {
-    id: 'linkedin-extension',
-    title: 'NxtJob AI LinkedIn Optimizer',
-    description:
-      'Chrome extension built with Plasmo framework using Shadow DOM. AI-powered LinkedIn optimization with job tracking, profile enhancement, and networking tools. Featured on Chrome Web Store with 4.6★ rating and 3,000+ users.',
-    impact: '4.6★ rating, 3,000+ users',
-    tags: ['Chrome Extension', 'Plasmo', 'AI/ML', 'Shadow DOM'],
-    gradient: 'from-blue-600 to-indigo-500',
-    featured: true,
-    type: 'company',
-    hasDemo: true,
-    demoUrl: 'https://chromewebstore.google.com/detail/oedechpcnjolalnpghbibmadgfjgaopm',
-    size: 'large',
-  },
-  {
-    id: 'whatsapp-extension',
-    title: 'WAsurge - WhatsApp CRM Extension',
-    description:
-      'Chrome extension that transforms WhatsApp Web into a powerful CRM. Features bulk messaging, contact management, CSV uploads, and progress tracking. Perfect 5.0★ rating with 282+ users.',
-    impact: '5.0★ rating, 282+ users',
-    tags: ['Chrome Extension', 'Plasmo', 'CRM', 'Shadow DOM'],
-    gradient: 'from-green-600 to-emerald-500',
-    featured: true,
-    type: 'company',
-    hasDemo: true,
-    demoUrl: 'https://chromewebstore.google.com/detail/bdnjmmbbchjkbnmbphchknkalfakofnj',
-    size: 'normal',
-  },
-  {
-    id: 'payment-gateway',
-    title: 'NxtJob Payment Platform',
-    description:
-      'Production payment platform supporting multiple Indian gateways (PhonePe, Paytm, Razorpay, Cashfree, Stripe). Features automated invoicing, subscription management, and access control.',
-    impact: '25% efficiency boost',
-    tags: ['Node.js', 'Payment APIs', 'Automation'],
-    gradient: 'from-indigo-500 to-purple-500',
-    type: 'company',
-    hasDemo: true,
-    demoUrl: 'https://pay.nxtjob.ai/ignite',
-    size: 'normal',
-  },
-  {
     id: 'omega',
-    title: 'Omega (AI Job Platform)',
+    title: 'Omega — AI Resume Engine',
     description:
-      'Enterprise AI platform for job analysis, skill mapping, and resume generation. Proprietary product with advanced LLM integration and RAG techniques.',
-    impact: '90% time reduction (30 days → 3-5 days)',
-    tags: ['AI/ML', 'Next.js', 'Node.js', 'OpenAI', 'RAG'],
+      'LLM + RAG pipeline for job-specific resume generation and skill mapping. Reduced resume creation from 30 days to 3–5 days for 500+ users. Integrated into NxtJob\'s core product flow.',
+    impact: '90% time reduction · 500+ users · production',
+    tags: ['LLM', 'RAG', 'Next.js', 'Node.js', 'OpenAI'],
     gradient: 'from-purple-500 to-pink-500',
+    featured: false,
     type: 'company-private',
     hasDemo: false,
     size: 'normal',
   },
   {
     id: 'erp-crm',
-    title: 'Enterprise ERP & CRM',
+    title: 'Role-based ERP & CRM Backend',
     description:
-      'In-house role-based enterprise system with file management, calendar integration, and workflow automation. Handles 10K+ monthly records with advanced data synchronization.',
-    impact: '30% operational efficiency',
-    tags: ['React', 'Node.js', 'MySQL', 'Drizzle ORM'],
-    gradient: 'from-emerald-500 to-teal-500',
+      'Multi-tenant backend with Google Calendar sync (sub-200ms updates), Google Drive-like file system, AWS SES automation, and support for 100+ concurrent users across 10,000+ monthly records.',
+    impact: '30% efficiency gain · 50% redundant email reduction via SES',
+    tags: ['Node.js', 'MySQL', 'Drizzle ORM', 'AWS SES', 'TypeScript'],
+    gradient: 'from-cyan-500 to-blue-500',
+    featured: false,
     type: 'company-private',
     hasDemo: false,
     size: 'normal',
   },
 ];
 
-const categories = ['All', 'Personal', 'Company Public', 'Company Private', 'Chrome Extension', 'AI/ML'];
+const categories = ['All', 'Infrastructure', 'AI / Agents', 'Chrome Extensions', 'Open Source'];
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -110,13 +124,15 @@ export default function Projects() {
   const filteredProjects =
     selectedCategory === 'All'
       ? projects
-      : selectedCategory === 'Personal'
-        ? projects.filter((p) => p.type === 'personal')
-        : selectedCategory === 'Company Public'
-          ? projects.filter((p) => p.type === 'company')
-          : selectedCategory === 'Company Private'
-            ? projects.filter((p) => p.type === 'company-private')
-            : projects.filter((p) => p.tags.includes(selectedCategory));
+      : selectedCategory === 'Infrastructure'
+        ? projects.filter((p) => ['surtur-engine', 'erp-crm', 'google-calendar-npm'].includes(p.id))
+        : selectedCategory === 'AI / Agents'
+          ? projects.filter((p) => ['ai-orchestration-agent', 'omega', 'nxtjob-chrome-suite'].includes(p.id))
+          : selectedCategory === 'Chrome Extensions'
+            ? projects.filter((p) => p.tags.some((t) => t.includes('Chrome Extension') || t.includes('Plasmo')))
+            : selectedCategory === 'Open Source'
+              ? projects.filter((p) => p.type === 'personal')
+              : projects;
 
   return (
     <section id="projects" className="overflow-hidden relative py-20 md:py-32">
@@ -142,20 +158,22 @@ export default function Projects() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={slideUp}
-          className="mb-12 text-center"
+          className="mb-12"
         >
-          <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl font-heading">
-            Featured <span className="text-gradient">Projects</span>
+          <div className="flex items-center gap-4 mb-3">
+            <div className="h-px w-12" style={{ background: 'rgba(249,115,22,0.4)' }} />
+            <span className="text-xs tracking-widest uppercase" style={{ color: '#F97316', fontFamily: 'var(--font-mono), JetBrains Mono, monospace' }}>
+              Projects
+            </span>
+          </div>
+          <h2
+            className="text-4xl sm:text-5xl md:text-6xl uppercase tracking-wide mb-3"
+            style={{ fontFamily: 'var(--font-display), Bebas Neue, sans-serif', color: '#F0EDE8' }}
+          >
+            Built in <span className="text-gradient">Production</span>
           </h2>
-          <motion.div
-            className="mx-auto mt-3 h-px w-20 bg-gradient-primary"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          />
-          <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
-            Building innovative solutions that drive real business impact
+          <p className="text-base max-w-xl" style={{ color: '#666' }}>
+            Production systems, AI agents, and independent products — built at scale
           </p>
         </motion.div>
 
@@ -232,12 +250,12 @@ export default function Projects() {
                         <span
                           className={cn(
                             'px-2 py-1 text-xs font-medium rounded-full',
-                            project.type === 'personal' && 'bg-blue-500/20 text-blue-400',
-                            project.type === 'company' && 'bg-purple-500/20 text-purple-400',
+                            project.type === 'personal' && 'bg-teal-500/20 text-teal-400',
+                            project.type === 'company' && 'bg-blue-500/20 text-blue-400',
                             project.type === 'company-private' && 'bg-orange-500/20 text-orange-400'
                           )}
                         >
-                          {project.type === 'personal' ? 'Personal' : project.type === 'company' ? 'Public' : 'Private'}
+                          {project.type === 'personal' ? 'Own Product' : project.type === 'company' ? 'Live' : 'Proprietary'}
                         </span>
                       </div>
                     </div>
@@ -273,13 +291,11 @@ export default function Projects() {
                           className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-white rounded-lg transition-all duration-300 bg-gradient-primary hover:shadow-lg hover:shadow-primary/50"
                         >
                           <ExternalLink className="w-4 h-4" />
-                          {project.tags.includes('NPM')
+                          {project.tags.includes('NPM') || project.tags.includes('Google Calendar API')
                             ? 'View on NPM'
-                            : project.tags.includes('Chrome Extension')
-                              ? 'View Extension'
-                              : project.tags.includes('Payment APIs')
-                                ? 'View Platform'
-                                : 'View Demo'}
+                            : project.tags.some((t) => t.includes('Chrome Extension') || t.includes('Plasmo'))
+                              ? 'View on Chrome Store'
+                              : 'View Demo'}
                         </a>
                       ) : (
                         <div className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-muted-foreground rounded-lg bg-white/5">

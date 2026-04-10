@@ -1,84 +1,40 @@
 'use client';
 
-import { Marquee } from '@/components/ui/Marquee';
-import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { slideUp, staggerContainer } from '@/lib/animations';
 import { motion } from 'framer-motion';
 
 const skillCategories = [
   {
+    id: 'backend',
+    title: 'Backend & API',
+    accent: '#F97316',
+    skills: ['NestJS', 'Node.js', 'TypeScript', 'Express', 'Drizzle ORM', 'MySQL', 'MongoDB', 'REST', 'WebSocket'],
+  },
+  {
+    id: 'infrastructure',
+    title: 'Distributed Systems',
+    accent: '#22D3EE',
+    skills: ['Redis', 'BullMQ', 'IMAP / SMTP', 'OAuth2', 'AWS SES', 'Cloudflare Workers', 'Queue Orchestration', 'Multi-tenancy'],
+  },
+  {
+    id: 'ai',
+    title: 'AI & Agents',
+    accent: '#A78BFA',
+    skills: ['LLM Integration', 'RAG Pipelines', 'Agent Orchestration', 'Tool Routing', 'OpenAI API', 'Prompt Engineering', 'Async State Machines'],
+  },
+  {
     id: 'frontend',
     title: 'Frontend',
-    skills: [
-      { name: 'React', icon: '⚛️' },
-      { name: 'Next.js', icon: '▲' },
-      { name: 'TypeScript', icon: '🔷' },
-      { name: 'Tailwind CSS', icon: '🎨' },
-      { name: 'Framer Motion', icon: '🎬' },
-      { name: 'Redux', icon: '🔄' },
-    ],
-    gradient: 'from-blue-500 to-cyan-500',
-    spotlightColor: 'rgba(59,130,246,0.12)',
-  },
-  {
-    id: 'backend',
-    title: 'Backend',
-    skills: [
-      { name: 'Node.js', icon: '🟢' },
-      { name: 'Express', icon: '🚀' },
-      { name: 'Cloudflare Workers', icon: '☁️' },
-      { name: 'Drizzle ORM', icon: '🗄️' },
-      { name: 'MySQL', icon: '🐬' },
-      { name: 'MongoDB', icon: '🍃' },
-    ],
-    gradient: 'from-green-500 to-teal-500',
-    spotlightColor: 'rgba(20,184,166,0.12)',
-  },
-  {
-    id: 'ai-ml',
-    title: 'AI/ML',
-    skills: [
-      { name: 'LLM Integration', icon: '🤖' },
-      { name: 'RAG', icon: '🧠' },
-      { name: 'OpenAI APIs', icon: '🔮' },
-      { name: 'Prompt Engineering', icon: '✍️' },
-    ],
-    gradient: 'from-purple-500 to-pink-500',
-    spotlightColor: 'rgba(139,92,246,0.14)',
-  },
-  {
-    id: 'tools',
-    title: 'Tools & Others',
-    skills: [
-      { name: 'Git', icon: '📦' },
-      { name: 'AWS SES', icon: '☁️' },
-      { name: 'Socket.IO', icon: '🔌' },
-      { name: 'Google APIs', icon: '🔍' },
-      { name: 'Mapbox', icon: '🗺️' },
-      { name: 'Azure', icon: '🔵' },
-    ],
-    gradient: 'from-orange-500 to-red-500',
-    spotlightColor: 'rgba(249,115,22,0.12)',
+    accent: '#2DD4BF',
+    skills: ['React', 'Next.js', 'SvelteKit', 'Tailwind CSS', 'Framer Motion', 'Plasmo', 'Shadow DOM', 'Chrome Extensions'],
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="overflow-hidden relative py-20 md:py-32">
+    <section id="skills" className="relative py-20 md:py-32 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background-secondary to-background" />
-      <motion.div
-        className="absolute left-0 top-1/3 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, transparent 70%)', filter: 'blur(60px)' }}
-        animate={{ x: [0, 20, -10, 0], scale: [1, 1.1, 0.9, 1] }}
-        transition={{ duration: 11, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute right-0 bottom-1/3 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.1) 0%, transparent 70%)', filter: 'blur(60px)' }}
-        animate={{ x: [0, -20, 10, 0], scale: [1, 0.9, 1.1, 1] }}
-        transition={{ duration: 14, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut', delay: 4 }}
-      />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #0A0A0A, #0D0D0D, #0A0A0A)' }} />
 
       <div className="container relative px-4 mx-auto sm:px-6 lg:px-8">
         {/* Header */}
@@ -87,77 +43,90 @@ export default function Skills() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={slideUp}
-          className="mb-16 text-center"
+          className="mb-16"
         >
-          <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl font-heading">
-            Skills & <span className="text-gradient">Expertise</span>
+          <div className="flex items-center gap-4 mb-3">
+            <div className="h-px flex-1 max-w-12" style={{ background: 'rgba(249,115,22,0.4)' }} />
+            <span
+              className="text-xs tracking-widest uppercase"
+              style={{ color: '#F97316', fontFamily: 'var(--font-mono), JetBrains Mono, monospace' }}
+            >
+              Stack
+            </span>
+          </div>
+          <h2
+            className="text-4xl sm:text-5xl md:text-6xl font-display uppercase tracking-wide"
+            style={{ fontFamily: 'var(--font-display), Bebas Neue, sans-serif', color: '#F0EDE8' }}
+          >
+            Skills &{' '}
+            <span className="text-gradient">Expertise</span>
           </h2>
-          <motion.div
-            className="mx-auto mt-3 h-px w-20 bg-gradient-primary"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          />
-          <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
-            Technologies and tools I use to bring ideas to life
+          <p className="mt-3 text-base max-w-xl" style={{ color: '#666' }}>
+            Technologies I use to build systems that hold under load.
           </p>
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Skill grid */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={staggerContainer}
-          className="grid grid-cols-1 gap-8 md:grid-cols-2"
+          className="grid grid-cols-1 md:grid-cols-2 gap-px"
+          style={{ border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.03)', borderRadius: '16px', overflow: 'hidden' }}
         >
-          {skillCategories.map((category) => (
-            <motion.div key={category.id} variants={slideUp} whileHover={{ y: -4, transition: { duration: 0.2 } }}>
-              <SpotlightCard
-                className="p-8 rounded-2xl glass-elite h-full"
-                spotlightColor={category.spotlightColor}
-              >
-                {/* Category Header */}
-                <div className="flex gap-3 items-center mb-6">
-                  <motion.div
-                    className={`h-1 bg-gradient-to-r ${category.gradient} rounded-full`}
-                    initial={{ width: 0 }}
-                    whileInView={{ width: 48 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-                  />
-                  <h3 className="text-2xl font-bold">{category.title}</h3>
-                </div>
+          {skillCategories.map((category, idx) => (
+            <motion.div
+              key={category.id}
+              variants={slideUp}
+              className="p-8 group"
+              style={{
+                background: '#0A0A0A',
+                borderRight: idx % 2 === 0 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+                borderBottom: idx < 2 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+              }}
+            >
+              {/* Category header */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: category.accent, boxShadow: `0 0 8px ${category.accent}` }} />
+                <h3
+                  className="text-xs font-semibold tracking-widest uppercase"
+                  style={{ color: category.accent, fontFamily: 'var(--font-mono), JetBrains Mono, monospace' }}
+                >
+                  {category.title}
+                </h3>
+              </div>
 
-                {/* Marquee skill rows */}
-                <div className="space-y-3">
-                  <Marquee speed="normal" pauseOnHover>
-                    {category.skills.slice(0, Math.ceil(category.skills.length / 2)).map((skill) => (
-                      <div
-                        key={skill.name}
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/25 hover:bg-white/10 transition-all duration-200 cursor-default flex-shrink-0"
-                      >
-                        <span className="text-xl">{skill.icon}</span>
-                        <span className="text-sm font-medium text-white whitespace-nowrap">{skill.name}</span>
-                      </div>
-                    ))}
-                  </Marquee>
-                  {category.skills.length > 3 && (
-                    <Marquee speed="normal" reverse pauseOnHover>
-                      {category.skills.slice(Math.ceil(category.skills.length / 2)).map((skill) => (
-                        <div
-                          key={skill.name}
-                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-white/25 hover:bg-white/10 transition-all duration-200 cursor-default flex-shrink-0"
-                        >
-                          <span className="text-xl">{skill.icon}</span>
-                          <span className="text-sm font-medium text-white whitespace-nowrap">{skill.name}</span>
-                        </div>
-                      ))}
-                    </Marquee>
-                  )}
-                </div>
-              </SpotlightCard>
+              {/* Skill tags — clean text labels */}
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <motion.span
+                    key={skill}
+                    whileHover={{ scale: 1.03 }}
+                    className="px-3 py-1.5 text-sm rounded-lg transition-all duration-200 cursor-default"
+                    style={{
+                      background: 'rgba(255,255,255,0.04)',
+                      border: '1px solid rgba(255,255,255,0.07)',
+                      color: '#AAAAAA',
+                      fontFamily: 'var(--font-mono), JetBrains Mono, monospace',
+                    }}
+                    onMouseEnter={e => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.borderColor = `${category.accent}40`;
+                      el.style.color = category.accent;
+                      el.style.background = `${category.accent}08`;
+                    }}
+                    onMouseLeave={e => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.borderColor = 'rgba(255,255,255,0.07)';
+                      el.style.color = '#AAAAAA';
+                      el.style.background = 'rgba(255,255,255,0.04)';
+                    }}
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </motion.div>

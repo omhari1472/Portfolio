@@ -9,16 +9,17 @@ const experiences = [
   {
     id: 'watevs-sde',
     company: 'Watevs',
-    location: 'London, United Kingdom',
+    location: 'London, United Kingdom (Remote)',
     role: 'Software Engineer',
     period: 'February 2026 - Present',
     type: 'Full-time',
-    tags: ['Go', 'Svelte', 'ElysiaJS', 'Bun', 'TypeScript'],
+    tags: ['NestJS', 'TypeScript', 'Redis', 'BullMQ', 'IMAP', 'OAuth2', 'SvelteKit'],
     achievements: [
-      'Architected and built the Sequencer — a campaign planning engine that lets teams design multi-step cold email sequences with configurable delays, branching conditions, and audience targeting',
-      'Engineered high-throughput email dispatch services in Go, enabling reliable bulk delivery with per-recipient personalisation at scale',
-      'Developed a reply-tracking pipeline that captures inbound responses, threads them to the originating campaign, and surfaces engagement analytics in real time',
-      'Built the campaign management dashboard in Svelte, providing a fast, reactive UI for monitoring sequence progress, open/reply rates, and prospect status',
+      'Built Surtur — a distributed email dispatch and warmup engine processing 100,000+ emails/day across rotating mailboxes, with a 5-queue Redis/BullMQ architecture (send, interact, action, analytics, monitoring)',
+      'Engineered IMAP connection pooling with per-account OAuth2 token refresh (mutex-guarded to prevent race conditions) and ImapInteractionApi for inbox placement simulation',
+      'Implemented DSN bounce detection (RFC 3464), real-time seed health scoring, per-mailbox deliverability analytics, and webhook-based alerting with cooldown logic',
+      'Building an AI orchestration agent that routes a single customer natural language prompt across 4 services — data sourcing, contact enrichment, inbox warmup, and sequence execution — replacing ~2 hours of manual campaign setup',
+      'Shipped a SvelteKit ops dashboard for campaign management, sequence builder, seed monitor, and weekly performance reporting — in active production use',
     ],
     gradient: 'from-orange-500 to-amber-400',
   },
@@ -87,20 +88,22 @@ export default function Experience() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={slideUp}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-4">
-            Work <span className="text-gradient">Experience</span>
+          <div className="flex items-center gap-4 mb-3">
+            <div className="h-px w-12" style={{ background: 'rgba(249,115,22,0.4)' }} />
+            <span className="text-xs tracking-widest uppercase" style={{ color: '#F97316', fontFamily: 'var(--font-mono), JetBrains Mono, monospace' }}>
+              Experience
+            </span>
+          </div>
+          <h2
+            className="text-4xl sm:text-5xl md:text-6xl uppercase tracking-wide mb-3"
+            style={{ fontFamily: 'var(--font-display), Bebas Neue, sans-serif', color: '#F0EDE8' }}
+          >
+            Work <span className="text-gradient">History</span>
           </h2>
-          <motion.div
-            className="mx-auto mt-3 h-px w-20 bg-gradient-primary"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          />
-          <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
-            Building impactful products across UK startups and AI-powered platforms
+          <p className="text-base max-w-xl" style={{ color: '#666' }}>
+            Distributed systems, AI agents, and production-grade infrastructure — remote for a London startup
           </p>
         </motion.div>
 

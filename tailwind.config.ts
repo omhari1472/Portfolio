@@ -11,19 +11,20 @@ const config: Config = {
     extend: {
       colors: {
         background: {
-          DEFAULT: '#0A0A0F',
-          secondary: '#1A1A2E',
+          DEFAULT: '#0A0A0A',
+          secondary: '#111111',
         },
         primary: {
-          DEFAULT: '#8B5CF6',
-          light: '#A78BFA',
-          dark: '#7C3AED',
+          DEFAULT: '#F97316',
+          light: '#FB923C',
+          dark: '#EA580C',
         },
         accent: {
-          cyan: '#06B6D4',
-          neon: '#00F5FF',
-          pink: '#FF006E',
-          amber: '#F59E0B',
+          cyan: '#22D3EE',
+          neon: '#A3E635',
+          pink: '#F43F5E',
+          amber: '#F97316',
+          teal: '#2DD4BF',
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -43,14 +44,16 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Space Grotesk', 'sans-serif'],
+        sans: ['var(--font-sans)', 'DM Sans', 'sans-serif'],
+        heading: ['var(--font-sans)', 'DM Sans', 'sans-serif'],
+        display: ['var(--font-display)', 'Bebas Neue', 'sans-serif'],
+        mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
-        'gradient-accent': 'linear-gradient(135deg, #00F5FF 0%, #FF006E 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)',
+        'gradient-accent': 'linear-gradient(135deg, #22D3EE 0%, #2DD4BF 100%)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

@@ -14,49 +14,12 @@ const education = [
     period: '2021 - 2025',
     grade: '8.4 CGPA',
     highlights: [
-      'Active member of Codesmith Club',
+      'Started building production backend systems from second year',
+      'Active member of Codesmith Club — shipped multiple internal tools',
       'Qualified GATE 2024',
-      'Participated in multiple hackathons',
-      'Developed several academic and personal projects',
+      'Top 8 finish at RVITM Hackathon (100+ teams)',
     ],
     gradient: 'from-purple-500 to-pink-500',
-  },
-  {
-    id: 'bes-12th',
-    degree: 'Higher Secondary Education (12th)',
-    institution: 'British English School',
-    location: 'Gaya, Bihar',
-    period: '2018 - 2020',
-    grade: '68.4%',
-    highlights: [
-      'Qualified Pre-Regional Mathematics Olympiad (PRMO) 2019',
-      'Developed programming skills during COVID-19 pandemic',
-      'Explored various technology domains',
-    ],
-    gradient: 'from-blue-500 to-cyan-500',
-  },
-  {
-    id: 'destiny-10th',
-    degree: 'Secondary Education (10th)',
-    institution: 'Camford Public School',
-    location: 'Patna, Bihar',
-    period: '2016 - 2018',
-    grade: '85.8%',
-    highlights: ['Strong academic foundation in mathematics and science', 'Started exploring web development'],
-    gradient: 'from-green-500 to-teal-500',
-  },
-  {
-    id: 'destiny-early',
-    degree: 'Early Education',
-    institution: 'CBSE Destiny International School',
-    location: 'Patna, Bihar',
-    period: 'Till 2016',
-    grade: 'Excellent',
-    highlights: [
-      'Developed interest in computer games and programming',
-      'Started learning web development during school years',
-    ],
-    gradient: 'from-orange-500 to-red-500',
   },
 ];
 
@@ -97,7 +60,7 @@ export default function Education() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           />
-          <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">Academic journey from Patna to Mysuru</p>
+          <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">Information Science Engineering, NIE Institute of Technology</p>
         </motion.div>
 
         {/* Education Timeline */}

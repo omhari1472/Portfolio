@@ -1,33 +1,33 @@
 export const PERSONAL_INFO = {
   name: 'Hari Om',
-  title: 'Full-Stack Developer & AI Engineer',
-  location: 'Bengaluru, Karnataka, India',
+  title: 'AI Systems Engineer · Distributed Infrastructure',
+  location: 'Bengaluru, India · Open to Remote & Relocation (UK/US)',
   email: 'omhari1472@gmail.com',
   github: 'https://github.com/omhari1472',
   linkedin: 'https://www.linkedin.com/in/om-hari/',
-  bio: "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.",
+  bio: "I build backend systems and AI agents that operate at production scale. Currently running a 100,000+ email/day dispatch engine and an AI orchestration layer for a London-based outreach startup. Open to senior backend, infrastructure, and AI engineering roles at US/UK startups.",
 } as const;
 
 export const STATS = [
   {
-    label: 'CGPA',
-    value: '8.4/10',
-    description: 'Academic Excellence',
+    label: 'Emails / Day',
+    value: '100k+',
+    description: 'Dispatch Engine at Scale',
   },
   {
-    label: 'Experience',
-    value: '1+ Year',
-    description: 'Professional Work',
+    label: 'Chrome Users',
+    value: '3k+',
+    description: 'Across Published Extensions',
   },
   {
-    label: 'Projects',
-    value: '15+',
-    description: 'Completed Successfully',
-  },
-  {
-    label: 'Efficiency',
+    label: 'Workflow Reduction',
     value: '90%',
-    description: 'Improvement Achieved',
+    description: 'Via AI Automation',
+  },
+  {
+    label: 'Availability',
+    value: 'Remote',
+    description: 'Open to UK / US Relocation',
   },
 ] as const;
 

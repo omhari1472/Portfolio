@@ -7,10 +7,10 @@ import { motion } from 'framer-motion';
 import { Award, MapPin, TrendingUp, Users } from 'lucide-react';
 
 const stats = [
-  { id: 'cgpa', icon: Award, label: 'CGPA', value: '8.4/10', color: 'text-primary' },
-  { id: 'efficiency', icon: TrendingUp, label: 'Efficiency Boost', value: '90%', color: 'text-accent-cyan' },
-  { id: 'projects', icon: Users, label: 'Team Projects', value: '15+', color: 'text-accent-neon' },
-  { id: 'location', icon: MapPin, label: 'Location', value: 'Bengaluru', color: 'text-accent-pink' },
+  { id: 'emails', icon: TrendingUp, label: 'Emails / Day', value: '100k+', color: 'text-primary' },
+  { id: 'users', icon: Users, label: 'Chrome Users', value: '3k+', color: 'text-accent-cyan' },
+  { id: 'efficiency', icon: Award, label: 'Workflow Reduction', value: '90%', color: 'text-accent-neon' },
+  { id: 'location', icon: MapPin, label: 'Open to Relocation', value: 'UK / US', color: 'text-accent-pink' },
 ];
 
 const journey = [
@@ -20,7 +20,7 @@ const journey = [
     title: 'Software Engineer',
     company: 'Watevs, London (Remote)',
     description:
-      'Building campaign sequencing and email dispatch infrastructure in Go + Svelte for a UK-based cold outreach startup.',
+      'Building Surtur — a 100k+/day email dispatch engine with 5-queue Redis/BullMQ architecture, IMAP connection pooling, OAuth token management, and deliverability intelligence. Also building an AI orchestration agent that runs the entire outbound pipeline from a single customer prompt.',
   },
   {
     id: 'sde-2025',
@@ -28,7 +28,7 @@ const journey = [
     title: 'Software Development Engineer',
     company: 'NxtJob.ai, Bengaluru',
     description:
-      'Revamped LinkedIn & WhatsApp Chrome extensions, implementing advanced chat categorization and scheduling, increasing user engagement by 30% among 2K users.',
+      'Shipped AI-powered Chrome extensions to 3,000+ users (4.6★), built LLM + RAG reply pipelines for 500+ daily active users, and engineered a multi-gateway payment platform across PhonePe, Razorpay, Stripe, and Cashfree.',
   },
   {
     id: 'intern-2024',
@@ -36,14 +36,14 @@ const journey = [
     title: 'Software Development Intern',
     company: 'NxtJob.ai, Bengaluru',
     description:
-      'Developed a role-based ERP/CRM backend to manage client data and sales pipelines, improving team efficiency by 30% across about 10K monthly records.',
+      'Built Omega — an LLM + RAG resume engine that cut creation time from 30 days to 3–5 days (90% reduction). Also built ERP/CRM backend, AWS SES automation pipeline, and multi-calendar module with Google Calendar sync.',
   },
   {
     id: 'nie-2021',
     year: '2021 - 2025',
     title: 'B.E. in Information Science',
     company: 'NIE Institute of Technology, Mysuru',
-    description: 'Graduated with 8.4 CGPA. Active member of Codesmith Club. Qualified GATE 2024.',
+    description: 'Graduated with 8.4 CGPA. Codesmith Club member. Started building production systems from second year.',
   },
 ];
 
@@ -74,55 +74,68 @@ export default function About() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={slideUp}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-4">
-            About <span className="text-gradient">Me</span>
+          <div className="flex items-center gap-4 mb-3">
+            <div className="h-px w-12" style={{ background: 'rgba(249,115,22,0.4)' }} />
+            <span
+              className="text-xs tracking-widest uppercase"
+              style={{ color: '#F97316', fontFamily: 'var(--font-mono), JetBrains Mono, monospace' }}
+            >
+              About
+            </span>
+          </div>
+          <h2
+            className="text-4xl sm:text-5xl md:text-6xl uppercase tracking-wide mb-3"
+            style={{ fontFamily: 'var(--font-display), Bebas Neue, sans-serif', color: '#F0EDE8' }}
+          >
+            Who I <span className="text-gradient">Am</span>
           </h2>
-          <motion.div
-            className="mx-auto mt-3 h-px w-16 bg-gradient-primary"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          />
-          <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
-            From Patna to Bengaluru, building innovative solutions that make a difference
+          <p className="text-base max-w-xl" style={{ color: '#666' }}>
+            Backend systems engineer building distributed infrastructure and AI agents at production scale
           </p>
         </motion.div>
 
-        {/* Stats Grid */}
+        {/* Stats — giant display numbers */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={staggerContainer}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-20"
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 mb-20"
         >
           {stats.map((stat) => (
-            <SpotlightCard
+            <motion.div
               key={stat.id}
-              className="glass-elite p-6 rounded-2xl group cursor-default"
-              spotlightColor="rgba(139,92,246,0.12)"
+              variants={slideUp}
+              className="flex flex-col items-center md:items-start group cursor-default"
             >
-              <motion.div variants={slideUp}>
-                <stat.icon className={`w-8 h-8 ${stat.color} mb-4 group-hover:scale-110 transition-transform`} />
-                <div className="text-2xl md:text-3xl font-bold mb-1">
-                  {stat.id === 'location' ? (
-                    stat.value
-                  ) : stat.id === 'cgpa' ? (
-                    <CountUp to={8.4} decimals={1} suffix="/10" duration={1.5} />
-                  ) : stat.id === 'efficiency' ? (
-                    <CountUp to={90} suffix="%" duration={1.5} />
-                  ) : stat.id === 'projects' ? (
-                    <CountUp to={15} suffix="+" duration={1.5} />
-                  ) : (
-                    stat.value
-                  )}
-                </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </motion.div>
-            </SpotlightCard>
+              <div
+                className="text-6xl md:text-7xl lg:text-8xl mb-2 transition-colors duration-300 group-hover:text-primary"
+                style={{
+                  fontFamily: 'var(--font-display), Bebas Neue, sans-serif',
+                  color: '#F0EDE8',
+                  letterSpacing: '0.02em',
+                  lineHeight: '0.9',
+                }}
+              >
+                {stat.id === 'emails' ? (
+                  <CountUp to={100} suffix="k+" duration={1.5} />
+                ) : stat.id === 'users' ? (
+                  <CountUp to={3} suffix="k+" duration={1.5} />
+                ) : stat.id === 'efficiency' ? (
+                  <CountUp to={90} suffix="%" duration={1.5} />
+                ) : (
+                  stat.value
+                )}
+              </div>
+              <div
+                className="text-xs uppercase tracking-widest"
+                style={{ color: '#F97316', fontFamily: 'var(--font-mono), JetBrains Mono, monospace' }}
+              >
+                {stat.label}
+              </div>
+            </motion.div>
           ))}
         </motion.div>
 
@@ -135,15 +148,18 @@ export default function About() {
           className="max-w-3xl mx-auto mb-20 text-center"
         >
           <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-            I&apos;m <span className="text-primary font-semibold">Hari Om</span>, a passionate Full-Stack Developer and
-            AI Engineer from Patna, Bihar. My journey in technology began during my school years when I started
-            exploring web development, sparked by my childhood fascination with computer games.
+            I&apos;m <span className="text-primary font-semibold">Hari Om</span>, a backend-leaning engineer specialising
+            in distributed messaging systems and AI-integrated workflows. Currently at{' '}
+            <span className="text-primary font-semibold">Watevs</span> (London), I&apos;m building{' '}
+            <span className="text-accent-cyan font-semibold">Surtur</span> — an email dispatch and warmup engine that
+            processes 100,000+ emails per day across rotating mailboxes with a 5-queue Redis/BullMQ architecture.
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Currently working at <span className="text-primary font-semibold">Watevs</span> (London) and previously at{' '}
-            <span className="text-primary font-semibold">NxtJob.ai</span> in Bengaluru, I specialise in building
-            scalable web applications and AI-powered solutions. I&apos;ve delivered projects improving efficiency by up
-            to 90%, demonstrating my commitment to creating impactful technology solutions.
+            Alongside the engine, I&apos;m building an{' '}
+            <span className="text-primary font-semibold">AI orchestration agent</span> that replaces manual campaign
+            setup with a single natural language prompt — routing across data sourcing, enrichment, inbox warmup, and
+            sequence execution. I care about systems that hold under load, code that&apos;s maintainable, and shipping
+            things that work in production — not just in demos.
           </p>
         </motion.div>
 
@@ -154,9 +170,10 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
             variants={slideUp}
-            className="text-2xl md:text-3xl font-heading font-bold text-center mb-12"
+            className="text-3xl md:text-4xl uppercase tracking-wide text-center mb-12"
+            style={{ fontFamily: 'var(--font-display), Bebas Neue, sans-serif', color: '#F0EDE8' }}
           >
-            My <span className="text-gradient">Journey</span>
+            The <span className="text-gradient">Timeline</span>
           </motion.h3>
 
           <div className="relative">
