@@ -146,7 +146,8 @@ export default function Hero() {
             <span style={{ color: '#F97316', fontWeight: 600 }}>100k+ email/day dispatch engine</span>
             {' '}and an AI orchestration agent for a London startup —
             distributed queues, IMAP pooling, multi-service automation.
-            Open to senior backend &amp; AI roles at US/UK startups.
+            Open to senior backend &amp; AI roles at US/UK startups.{' '}
+            <span style={{ color: '#555555' }}>IST (UTC+5:30) · available for UK/US overlap.</span>
           </motion.p>
 
           {/* CTA */}

@@ -4,7 +4,7 @@ import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { slideUp, staggerContainer } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ExternalLink, Github, TrendingUp } from 'lucide-react';
+import { ExternalLink, Github, Play, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 
 const projects = [
@@ -19,6 +19,7 @@ const projects = [
     featured: true,
     type: 'company-private',
     hasDemo: false,
+    // demoVideo: 'https://loom.com/share/your-loom-id-here',  ← paste Loom URL when ready
     size: 'large',
   },
   {
@@ -32,6 +33,7 @@ const projects = [
     featured: true,
     type: 'company-private',
     hasDemo: false,
+    // demoVideo: 'https://loom.com/share/your-loom-id-here',  ← paste Loom URL when ready
     size: 'large',
   },
   {
@@ -282,13 +284,24 @@ export default function Projects() {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex gap-3 mt-auto">
+                    <div className="flex gap-2 mt-auto flex-wrap">
+                      {(project as { demoVideo?: string }).demoVideo && (
+                        <a
+                          href={(project as { demoVideo?: string }).demoVideo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-white rounded-lg transition-all duration-300 bg-gradient-primary hover:shadow-lg hover:shadow-primary/50 text-sm"
+                        >
+                          <Play className="w-4 h-4" />
+                          Watch Demo
+                        </a>
+                      )}
                       {project.hasDemo ? (
                         <a
                           href={(project as { demoUrl?: string }).demoUrl || '#'}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-white rounded-lg transition-all duration-300 bg-gradient-primary hover:shadow-lg hover:shadow-primary/50"
+                          className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-white rounded-lg transition-all duration-300 bg-gradient-primary hover:shadow-lg hover:shadow-primary/50 text-sm"
                         >
                           <ExternalLink className="w-4 h-4" />
                           {project.tags.includes('NPM') || project.tags.includes('Google Calendar API')
@@ -297,9 +310,9 @@ export default function Projects() {
                               ? 'View on Chrome Store'
                               : 'View Demo'}
                         </a>
-                      ) : (
-                        <div className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium text-muted-foreground rounded-lg bg-white/5">
-                          <span className="text-sm">Proprietary Project</span>
+                      ) : !(project as { demoVideo?: string }).demoVideo && (
+                        <div className="flex flex-1 gap-2 justify-center items-center px-4 py-2 font-medium rounded-lg text-sm" style={{ background: 'rgba(255,255,255,0.04)', color: '#555' }}>
+                          Proprietary
                         </div>
                       )}
                     </div>
