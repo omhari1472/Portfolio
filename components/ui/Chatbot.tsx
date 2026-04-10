@@ -18,12 +18,12 @@ const qa: QA[] = [
   {
     keywords: /\b(who (is|are) (hari|you)|about hari|introduce|tell me about (him|hari|yourself))\b/i,
     response:
-      "Hari Om is a Full-Stack Developer & AI Engineer based in Bengaluru, India. He builds scalable web products and AI-powered tools — currently shipping a cold-email sequencer at Watevs (UK) and previously built Chrome extensions, LLM-powered features, and payment infrastructure at NxtJob.ai.",
+      "Hari Om is a Full-Stack Developer & AI Engineer based in Bengaluru, India. He builds scalable web products and AI-powered tools — currently shipping a cold-email sequencer at OutEngine (UK) and previously built Chrome extensions, LLM-powered features, and payment infrastructure at NxtJob.ai.",
   },
   {
-    keywords: /\bwatevs\b|\bcold.?email\b|\boutreach\b|\bsequencer\b|\buk.?(startup|job|company)\b/i,
+    keywords: /\boutengine\b|\bcold.?email\b|\boutreach\b|\bsequencer\b|\buk.?(startup|job|company)\b/i,
     response:
-      "Hari joined Watevs in February 2026 — a UK-based ad-tech startup focused on cold-email outreach. He's building the Sequencer: a campaign engine that plans multi-step email sequences, dispatches them at scale via Go services, tracks replies in real time, and surfaces analytics in a Svelte dashboard. Stack: Go · Svelte · ElysiaJS · Bun · TypeScript.",
+      "Hari joined OutEngine in February 2026 — a UK-based ad-tech startup focused on cold-email outreach. He's building the Sequencer: a campaign engine that plans multi-step email sequences, dispatches them at scale via Go services, tracks replies in real time, and surfaces analytics in a Svelte dashboard. Stack: Go · Svelte · ElysiaJS · Bun · TypeScript.",
   },
   {
     keywords: /\bnxtjob\b|\bnxt.?job\b/i,
@@ -38,7 +38,7 @@ const qa: QA[] = [
   {
     keywords: /\b(project|built|created|made|portfolio|side.?project|personal)\b/i,
     response:
-      "Some highlights from Hari's project portfolio:\n• Omega — AI job-scanner that reduced resume-creation time by 90%\n• Multi-gateway payments platform (PhonePe, Razorpay, Stripe, Cashfree, Paytm)\n• LLM+RAG chat-reply AI for LinkedIn & WhatsApp extensions\n• Sequencer — cold-email campaign engine at Watevs\n• Google Drive-like file system with nested folders & live previews\n\nCheck the Projects section for the full list!",
+      "Some highlights from Hari's project portfolio:\n• Omega — AI job-scanner that reduced resume-creation time by 90%\n• Multi-gateway payments platform (PhonePe, Razorpay, Stripe, Cashfree, Paytm)\n• LLM+RAG chat-reply AI for LinkedIn & WhatsApp extensions\n• Sequencer — cold-email campaign engine at OutEngine\n• Google Drive-like file system with nested folders & live previews\n\nCheck the Projects section for the full list!",
   },
   {
     keywords: /\b(educat|degree|college|university|study|cgpa|grade|academic)\b/i,
@@ -58,12 +58,12 @@ const qa: QA[] = [
   {
     keywords: /\b(location|where|based|live|city|country|india|bengaluru|uk|london)\b/i,
     response:
-      "Hari is based in Bengaluru, India, and currently working remotely for Watevs, a UK startup. He's comfortable with distributed teams and async collaboration across time zones.",
+      "Hari is based in Bengaluru, India, and currently working remotely for OutEngine, a UK startup. He's comfortable with distributed teams and async collaboration across time zones.",
   },
   {
     keywords: /\b(experience|year|senior|junior|career|job|work|history)\b/i,
     response:
-      "Hari has 1.5+ years of professional experience:\n• Watevs (Feb 2026 – Present) — Software Engineer, cold-email platform\n• NxtJob.ai SDE (Jun 2025 – Jan 2026) — AI features & payments\n• NxtJob.ai Intern (Sep 2024 – May 2025) — ERP, CRM, calendar, file system\n\nHe started shipping production code from day one of his internship.",
+      "Hari has 1.5+ years of professional experience:\n• OutEngine (Feb 2026 – Present) — Software Engineer, cold-email platform\n• NxtJob.ai SDE (Jun 2025 – Jan 2026) — AI features & payments\n• NxtJob.ai Intern (Sep 2024 – May 2025) — ERP, CRM, calendar, file system\n\nHe started shipping production code from day one of his internship.",
   },
   {
     keywords: /\b(ai|llm|machine.?learning|ml|rag|gpt|openai|artificial intelligence|vector)\b/i,
@@ -73,17 +73,17 @@ const qa: QA[] = [
   {
     keywords: /\b(go|golang)\b/i,
     response:
-      "Hari uses Go at Watevs for high-throughput email dispatch services — Go's goroutines and low memory footprint make it ideal for bulk email delivery at scale. He enjoys writing idiomatic Go for performance-critical backend work.",
+      "Hari uses Go at OutEngine for high-throughput email dispatch services — Go's goroutines and low memory footprint make it ideal for bulk email delivery at scale. He enjoys writing idiomatic Go for performance-critical backend work.",
   },
   {
     keywords: /\b(svelte|sveltekit)\b/i,
     response:
-      "Hari built the campaign management dashboard at Watevs with Svelte. He appreciates Svelte's minimal boilerplate and compile-time reactivity, which makes it great for data-heavy dashboards that need snappy UI updates.",
+      "Hari built the campaign management dashboard at OutEngine with Svelte. He appreciates Svelte's minimal boilerplate and compile-time reactivity, which makes it great for data-heavy dashboards that need snappy UI updates.",
   },
   {
     keywords: /\b(elysia|elysium|bun)\b/i,
     response:
-      "At Watevs Hari uses ElysiaJS (a Bun-native TypeScript HTTP framework) for internal API services. The Bun runtime's speed and ElysiaJS's end-to-end type safety are a great fit for a fast-moving startup.",
+      "At OutEngine Hari uses ElysiaJS (a Bun-native TypeScript HTTP framework) for internal API services. The Bun runtime's speed and ElysiaJS's end-to-end type safety are a great fit for a fast-moving startup.",
   },
   {
     keywords: /\b(thank|thanks|awesome|great|cool|nice|helpful)\b/i,
@@ -107,7 +107,7 @@ function getResponse(text: string): string {
   for (const { keywords, response } of qa) {
     if (keywords.test(text)) return response;
   }
-  return "I'm not sure about that one! Try asking about Hari's experience, skills, current job at Watevs, projects, or how to get in touch.";
+  return "I'm not sure about that one! Try asking about Hari's experience, skills, current job at OutEngine, projects, or how to get in touch.";
 }
 
 // ---------------------------------------------------------------------------

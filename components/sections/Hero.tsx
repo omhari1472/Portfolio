@@ -95,7 +95,7 @@ export default function Hero() {
               style={{ animation: 'status-pulse 2s ease-in-out infinite' }}
             />
             <span className="text-xs font-mono-label text-primary tracking-widest uppercase">
-              Currently Building · Watevs, London
+              Currently Building · OutEngine, London
             </span>
           </motion.div>
 

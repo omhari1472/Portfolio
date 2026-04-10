@@ -8,7 +8,7 @@ import { Briefcase, Calendar, MapPin } from 'lucide-react';
 const experiences = [
   {
     id: 'watevs-sde',
-    company: 'Watevs',
+    company: 'OutEngine',
     location: 'London, United Kingdom (Remote)',
     role: 'Software Engineer',
     period: 'February 2026 - Present',

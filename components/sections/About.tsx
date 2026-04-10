@@ -18,7 +18,7 @@ const journey = [
     id: 'watevs-2026',
     year: '2026 - Present',
     title: 'Software Engineer',
-    company: 'Watevs, London (Remote)',
+    company: 'OutEngine, London (Remote)',
     description:
       'Building Surtur — a 100k+/day email dispatch engine with 5-queue Redis/BullMQ architecture, IMAP connection pooling, OAuth token management, and deliverability intelligence. Also building an AI orchestration agent that runs the entire outbound pipeline from a single customer prompt.',
   },
@@ -150,7 +150,7 @@ export default function About() {
           <p className="text-lg text-muted-foreground leading-relaxed mb-4">
             I&apos;m <span className="text-primary font-semibold">Hari Om</span>, a backend-leaning engineer specialising
             in distributed messaging systems and AI-integrated workflows. Currently at{' '}
-            <span className="text-primary font-semibold">Watevs</span> (London), I&apos;m building{' '}
+            <span className="text-primary font-semibold">OutEngine</span> (London), I&apos;m building{' '}
             <span className="text-accent-cyan font-semibold">Surtur</span> — an email dispatch and warmup engine that
             processes 100,000+ emails per day across rotating mailboxes with a 5-queue Redis/BullMQ architecture.
           </p>
