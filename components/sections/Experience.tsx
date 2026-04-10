@@ -16,8 +16,8 @@ const experiences = [
     tags: ['NestJS', 'TypeScript', 'Redis', 'BullMQ', 'IMAP', 'OAuth2', 'SvelteKit'],
     achievements: [
       'Built Surtur — a distributed email dispatch and warmup engine processing 100,000+ emails/day across rotating mailboxes, with a 5-queue Redis/BullMQ architecture (send, interact, action, analytics, monitoring)',
-      'Engineered IMAP connection pooling with per-account OAuth2 token refresh (mutex-guarded to prevent race conditions) and ImapInteractionApi for inbox placement simulation',
-      'Implemented DSN bounce detection (RFC 3464), real-time seed health scoring, per-mailbox deliverability analytics, and webhook-based alerting with cooldown logic',
+      'Engineered connection pooling with per-account token lifecycle management and inbox placement simulation layer',
+      'Implemented bounce detection, real-time seed health scoring, per-mailbox deliverability analytics, and webhook-based alerting',
       'Building an AI orchestration agent that routes a single customer natural language prompt across 4 services — data sourcing, contact enrichment, inbox warmup, and sequence execution — replacing ~2 hours of manual campaign setup',
       'Shipped a SvelteKit ops dashboard for campaign management, sequence builder, seed monitor, and weekly performance reporting — in active production use',
     ],

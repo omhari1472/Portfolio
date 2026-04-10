@@ -43,8 +43,8 @@ export default function Contact() {
             Let&apos;s <span className="text-gradient">Talk</span>
           </h2>
           <p className="text-base max-w-xl" style={{ color: '#666' }}>
-            If you&apos;re building infrastructure, AI agents, or outreach tooling — I&apos;m probably already
-            thinking about the same problems. Email me directly.
+            Open to new roles, interesting projects, and good conversations about engineering.
+            Email me directly — no fluff, just a straightforward chat.
           </p>
         </motion.div>
 

@@ -26,7 +26,7 @@ const projects = [
     id: 'surtur-engine',
     title: 'Surtur — Email Dispatch & Warmup Engine',
     description:
-      'Distributed email infrastructure processing 100,000+ emails/day across rotating mailboxes. 5-queue Redis/BullMQ event system with IMAP connection pooling, mutex-guarded OAuth2 token refresh, DSN bounce detection (RFC 3464), and real-time deliverability scoring.',
+      'Distributed email infrastructure processing 100,000+ emails/day across rotating mailboxes. Multi-queue event architecture with connection pooling, token lifecycle management, bounce detection, and real-time deliverability scoring.',
     impact: '100,000+ emails/day · 5-queue pipeline · hundreds of mailboxes in production',
     tags: ['NestJS', 'Redis', 'BullMQ', 'IMAP', 'OAuth2', 'TypeScript'],
     gradient: 'from-orange-500 to-amber-400',
